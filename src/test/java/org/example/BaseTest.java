@@ -10,25 +10,34 @@ import org.testng.annotations.*;
 
 public class BaseTest {
     protected WebDriver driver;
-    protected ExtentReports extent;
-    protected ExtentTest test;
+    protected ExtentReports extent = ExtentManager.getInstance();
+    private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     @BeforeMethod
     public void setup() {
-        extent = ExtentManager.getInstance();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    public synchronized ExtentTest getExtentTest() {
+        return extentTest.get();
+    }
+
+    public synchronized void setExtentTest(ExtentTest test) {
+        extentTest.set(test);
+
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, "Test Failed: " + result.getThrowable());
+            getExtentTest().log(Status.FAIL, "Test Failed: " + result.getThrowable());
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, "Test Passed");
+            getExtentTest().log(Status.PASS, "Test Passed");
         } else if (result.getStatus() == ITestResult.SKIP) {
-            test.log(Status.SKIP, "Test Skipped: " + result.getThrowable());
+            getExtentTest().log(Status.SKIP, "Test Skipped: " + result.getThrowable());
         }
+
         if (driver != null) {
             driver.quit();
         }

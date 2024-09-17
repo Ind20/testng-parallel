@@ -8,11 +8,11 @@ public class ExtentManager {
 
     public synchronized static ExtentReports getInstance() {
         if (extent == null) {
-            ExtentSparkReporter reporter = new ExtentSparkReporter("test-output/ExtentReport.html");
+            ExtentSparkReporter sparkReporter = new ExtentSparkReporter("test-output/ExtentReport.html");
             extent = new ExtentReports();
-            extent.attachReporter(reporter);
-            extent.setSystemInfo("Tester", "Your Name");
+            extent.attachReporter(sparkReporter);
             extent.setSystemInfo("Environment", "QA");
+            extent.setSystemInfo("Tester", "Your Name");
         }
         return extent;
     }
