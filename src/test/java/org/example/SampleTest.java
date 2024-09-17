@@ -1,34 +1,36 @@
 package org.example;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.aventstack.extentreports.Status;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class SampleTest {
-    private WebDriver driver;
+public class SampleTest extends BaseTest {
 
-    @BeforeTest
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-    }
 
     @Test
-    public void testMethod1() throws InterruptedException {
+    public void testMethod1() {
+
+        test = extent.createTest("ChromeTest1 - Google Test");
         driver.get("https://www.google.co.in/");
         System.out.println("User navigated to : "+driver.getTitle());
+        String title = driver.getTitle();
+        test.log(Status.INFO, "Page title is: " + title);
+
+        Assert.assertTrue(title.contains("Google"));
+        test.log(Status.PASS, "Verified Google page title successfully.");
     }
 
     @Test
-    public void testMethod2() throws InterruptedException {
+    public void testMethod2() {
+        test = extent.createTest("ChromeTest2 - Bing Test");
         driver.get("https://www.bing.com/");
         System.out.println("User navigated to : "+driver.getTitle());
+        String title = driver.getTitle();
+        test.log(Status.INFO, "Page title is: " + title);
+
+        Assert.assertTrue(title.contains("Bing"));
+        test.log(Status.PASS, "Verified Bing page title successfully.");
+
     }
 
-    @AfterTest
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 }
