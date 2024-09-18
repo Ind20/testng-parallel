@@ -9,14 +9,14 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 public class BaseTest {
-    protected WebDriver driver;
-    protected ExtentReports extent = ExtentManager.getInstance();
+    ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    ExtentReports extent = ExtentManager.getInstance();
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     @BeforeMethod
     public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver.set(new ChromeDriver());
+        driver.get().manage().window().maximize();
     }
 
     public synchronized ExtentTest getExtentTest() {
@@ -39,7 +39,7 @@ public class BaseTest {
         }
 
         if (driver != null) {
-            driver.quit();
+            driver.get().quit();
         }
         extent.flush();
 
