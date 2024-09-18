@@ -8,6 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
 public class BaseTest {
     ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     ExtentReports extent = ExtentManager.getInstance();
@@ -42,7 +46,11 @@ public class BaseTest {
             driver.get().quit();
         }
         extent.flush();
+    }
 
+    @AfterSuite
+    public void publishReport() throws IOException {
+        Desktop.getDesktop().browse(new File("test-output\\ExtentReport.html").toURI());
     }
 }
 

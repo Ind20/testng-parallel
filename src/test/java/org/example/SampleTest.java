@@ -30,7 +30,7 @@ public class SampleTest extends BaseTest {
 
         Assert.assertTrue(title.contains("Bing"));
         getExtentTest().log(Status.PASS, "Verified Bing page title successfully.");
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
     }
 }
