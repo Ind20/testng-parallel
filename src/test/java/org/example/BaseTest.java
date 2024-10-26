@@ -13,14 +13,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class BaseTest {
-    ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static final ThreadLocal<WebDriver> thread = new ThreadLocal<>();
     ExtentReports extent = ExtentManager.getInstance();
-    private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+    private static final ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+
+    public static WebDriver getDriver() {
+        System.out.println("Setup - Thread ID: " + Thread.currentThread().getId());
+        return thread.get();
+    }
 
     @BeforeMethod
     public void setup() {
-        driver.set(new ChromeDriver());
-        driver.get().manage().window().maximize();
+        thread.set(new ChromeDriver());
     }
 
     public synchronized ExtentTest getExtentTest() {
@@ -42,8 +46,9 @@ public class BaseTest {
             getExtentTest().log(Status.SKIP, "Test Skipped: " + result.getThrowable());
         }
 
-        if (driver != null) {
-            driver.get().quit();
+        if (thread.get() != null) {
+            thread.get().quit();
+            thread.remove();
         }
         extent.flush();
     }
