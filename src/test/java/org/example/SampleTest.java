@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 
 public class SampleTest extends BaseTest {
 
-    @Test
+    @Test(groups = {"smoke"})
     public void testMethod1() throws InterruptedException {
         WebDriver driver = BaseTest.getDriver();
         setExtentTest(extent.createTest("ChromeTest1 - Google Test"));
@@ -20,7 +20,7 @@ public class SampleTest extends BaseTest {
         Thread.sleep(5000);
     }
 
-    @Test
+    @Test(groups = {"smoke"})
     public void testMethod2() throws InterruptedException {
         WebDriver driver = BaseTest.getDriver();
         setExtentTest(extent.createTest("ChromeTest2 - Bing Test"));

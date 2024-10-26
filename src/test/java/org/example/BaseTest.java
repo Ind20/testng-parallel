@@ -22,7 +22,7 @@ public class BaseTest {
         return thread.get();
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setup() {
         thread.set(new ChromeDriver());
     }
@@ -36,7 +36,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown(ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
             getExtentTest().log(Status.FAIL, "Test Failed: " + result.getThrowable());
@@ -53,7 +53,7 @@ public class BaseTest {
         extent.flush();
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void publishReport() throws IOException {
         Desktop.getDesktop().browse(new File("test-output\\ExtentReport.html").toURI());
     }
