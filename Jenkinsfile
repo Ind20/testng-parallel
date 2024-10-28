@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        JAVA_HOME = 'C:\Program Files\Java\jdk-17\bin'  // Set the Java version (adjust as needed)
+        JAVA_HOME = 'C:/Program Files/Java/jdk-17/bin'  // Set the Java version (adjust as needed)
     }
 
     stages {
