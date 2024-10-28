@@ -24,12 +24,6 @@ pipeline {
             }
         }
 
-        stage('Package') {
-            steps {
-                echo 'Packaging the project...'
-                bat 'mvn package'  // Creates the final artifact (e.g., .jar or .war)
-            }
-        }
     }
 
     post {
