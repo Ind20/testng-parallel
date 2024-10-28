@@ -2,7 +2,7 @@ pipeline {
     agent any  // Use any available agent or node
 
     tools {
-        maven 'Maven_3.9.8'  // Name of the Maven installation from Jenkins global tools
+        maven '3.9.8'  // Name of the Maven installation from Jenkins global tools
     }
 
     environment {
