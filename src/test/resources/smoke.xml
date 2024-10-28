@@ -3,7 +3,7 @@
 <suite name="TestSuite" parallel="methods" thread-count="5">
     <test name="ParallelExecutionTest">
         <classes>
-            <class name="org.example.RegressionTest"/>
+            <class name="org.example.SmokeTest"/>
         </classes>
     </test>
 </suite>

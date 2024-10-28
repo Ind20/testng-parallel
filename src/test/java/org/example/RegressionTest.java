@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class SampleTest extends BaseTest {
+public class RegressionTest extends BaseTest {
 
-    @Test(groups = {"smoke"})
+    @Test
     public void testMethod1() throws InterruptedException {
         WebDriver driver = BaseTest.getDriver();
         setExtentTest(extent.createTest("ChromeTest1 - Google Test"));
@@ -20,7 +20,7 @@ public class SampleTest extends BaseTest {
         Thread.sleep(5000);
     }
 
-    @Test(groups = {"smoke"})
+    @Test
     public void testMethod2() throws InterruptedException {
         WebDriver driver = BaseTest.getDriver();
         setExtentTest(extent.createTest("ChromeTest2 - Bing Test"));
