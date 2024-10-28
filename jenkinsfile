@@ -20,14 +20,14 @@ pipeline {
         stage('Build and Test') {
             steps {
                 echo 'Building the project with Maven...'
-                sh 'mvn clean test -P smoke'  // Clean, compile, run tests, and package the project
+                bat 'mvn clean test -P smoke'  // Clean, compile, run tests, and package the project
             }
         }
 
         stage('Package') {
             steps {
                 echo 'Packaging the project...'
-                sh 'mvn package'  // Creates the final artifact (e.g., .jar or .war)
+                bat 'mvn package'  // Creates the final artifact (e.g., .jar or .war)
             }
         }
     }
