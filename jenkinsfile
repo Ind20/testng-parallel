@@ -20,7 +20,7 @@ pipeline {
         stage('Build and Test') {
             steps {
                 echo 'Building the project with Maven...'
-                bat 'mvn clean test -P smoke'  // Clean, compile, run tests, and package the project
+                bat 'mvn clean test -P sanity'  // Clean, compile, run tests, and package the project
             }
         }
 
